@@ -27,7 +27,7 @@ app.use(cors(
 {
   origin:["https://bot-bazaar-nf46.vercel.app"],
   methods:["POST","GET"],
-  credentials:true
+  credentials:false
 }
 ))
 
