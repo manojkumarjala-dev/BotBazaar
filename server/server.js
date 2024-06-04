@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 app.use(cors(
 {
-  origin:["https://deploy-mern-1whq.vercel.app"],
+  origin:["https://bot-bazaar-nf46.vercel.app"],
   methods:["POST","GET"],
   credentials:true
 }
