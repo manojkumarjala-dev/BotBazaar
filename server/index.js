@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { Server } = require('socket.io');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 const app = express();
 const path = require('path');
@@ -19,8 +19,8 @@ const complaintRouter = require('./routes/complaintRoutes.js');
 const messageRouter = require('./routes/messageRoutes.js');
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 app.use(cors(
@@ -67,31 +67,4 @@ const server = app.listen(port, () => {
   console.log(`Click here to open: http://localhost:${port}`);
 });
 
-const io = new Server(server, {
-  cors: {
-    credentials: true,
-  },
-});
-
-let onlineUsers = new Map()
-io.on('connection', (socket) => {
-  socket.on("add-user", (userId) => {
-    onlineUsers.set(userId, socket.id);
-  });
-
-  socket.on("send-msg", (data) => {
-    const recipients = data.recipients
-    let recipientSockets = []
-    recipients.forEach(element => {
-      recipientSockets.push(onlineUsers.get(element))
-    });
-
-    if (recipientSockets) {
-      socket.to(recipientSockets).emit("msg-receive", {
-        message: data.message,
-        from: data.from,
-        users: [data.from,...recipients]
-      });
-    }
-  });
-});
+module.exports = app;
