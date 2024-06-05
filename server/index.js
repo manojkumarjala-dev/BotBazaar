@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+
 
 const app = express();
 const path = require('path');
@@ -18,18 +19,13 @@ const orderRouter = require('./routes/orderRoutes.js');
 const complaintRouter = require('./routes/complaintRoutes.js');
 const messageRouter = require('./routes/messageRoutes.js');
 
-app.use(cors());
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.json()); 
+
 app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
-app.use(cors(
-{
-  origin:["https://bot-bazaar-nf46.vercel.app"],
-  methods:["POST","GET"],
-  credentials:false
-}
-))
+app.use(cors())
+
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
@@ -66,5 +62,4 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log(`Click here to open: http://localhost:${port}`);
 });
-
-module.exports = app;
+module.exports =app

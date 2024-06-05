@@ -24,7 +24,6 @@ import ProductListScreen from './components/adminDashboard/products';
 import OrderListScreen from './components/adminDashboard/orders';
 import SuccessPage from './components/SuccessPage';
 import CreditCardForm from './components/CreditCard';import BookingsPage from './components/ownerDashboard/bookingsPage';
-import MessagesPage from './components/message/MessagesPage';
 import EditProduct from './components/adminDashboard/editProduct';
 import EditComplaint from './components/adminDashboard/editComplaint';
 import RenterComplaintsList from './components/renter/complaints';
@@ -70,7 +69,6 @@ function App() {
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/reset' element={<ResetPage />} />
           <Route path='/SecurityQuestions' element={<SecurityQuestionPage />} />
-          <Route path='/messages' element={<MessagesPage />} />
         </Route>
 
         <Route path='' element={<MerchantRoute />}>
