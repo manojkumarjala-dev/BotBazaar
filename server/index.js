@@ -43,19 +43,6 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-app.use(express.static(`${__dirname}/../client/build`));
-
-app.get('*', function (req, res) {
-  res.sendFile(
-    path.join(__dirname, '../client/build', 'index.html'),
-    function (err) {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err);
-      }
-    }
-  );
-});
 
 // log your server is running and the port
 const server = app.listen(port, () => {
