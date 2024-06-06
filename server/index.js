@@ -24,7 +24,12 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
-app.use(cors())
+const corsOptions = {
+  origin: 'http://your-frontend-domain.com', // Update this to match your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the methods you need
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 
 app.use('/api/user', userRouter);
